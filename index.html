@@ -145,26 +145,83 @@
 <b>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</b>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+This study aims to advance language proficiency assessment by evaluating and comparing the performance of several language models—ChatGPT, Gemini, and various Llama models—on the fine-grained classification of CEFR proficiency levels. 
+We focus on models' direct accuracy in distinguishing specific levels, as well as their accuracy within one level and across best and worst accuracy gaps between adjacent levels. Additionally, we assess models' capabilities both between and within each proficiency level, 
+  contributing to the scalability of automated assessment across the proficiency continuum.
 </p>
 
 <p>
 <b>How is it done today, and what are the limits of current practice?</b>
 </p>
 <p>
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Current models often struggle to classify language proficiency at a granular level, typically focusing on broader level distinctions or general proficiency scoring. 
+  Fine-grained distinctions within and between levels are frequently overlooked, and most efforts depend on model size or basic prompting techniques. 
+  These limitations hinder the adaptability and scalability of such models for applications requiring nuanced assessment.
 <p>
 
 <p>
 <b>Who cares? If you are successful, what difference will it make?</b>
 </p>
 <p>
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+This research adds to the scaling and continuum aspects of model assessment in language proficiency assessment tasks, enhancing the potential for accurate, automated, and scalable language proficiency classification across and within language levels. 
+  Success here would enable more precise proficiency evaluations and benefit NLP applications in language education, assessment, and personalized content generation.
+
 </p>
 
 <hr>
 
-<h2 id="approach">Approach</h2>
+<h2 id="problemform_ideas">Problem Formulation/Proposed Ideas</h2>
+
+<p>
+<b>Problem Formulation</b>
+</p>
+
+<p>
+The primary challenge is to accurately assess language proficiency at a fine-grained level across the CEFR proficiency scale (A1–C2), which requires distinguishing both between and within levels. 
+  Existing models are effective at broader classification but lack the precision needed for adjacent level distinctions, and their performance is largely model-size dependent. 
+  This project investigates two main gaps: 1) models’ ability to classify closely spaced proficiency levels accurately, and 2) how various factors—model type, prompt design, and text features—affect performance on both a coarse-grained (e.g., A vs. B) and fine-grained (e.g., A1 vs. A1.5) scale.
+</p>
+
+<p>
+<b>Proposed Ideas</b>
+</p>
+
+<p>To address these challenges, we propose:</p>
+
+<ol>
+    <li><strong>Model comparisons (including fine-grained models with varying sizes)</strong>
+        <ul>
+            <li>Evaluate direct accuracy, ±1 level accuracy, and gaps in accuracy between best and worst adjacent-level distinctions.</li>
+            <li>This will include models of various sizes, specifically Llama models (Llama 3.2 1B, Llama 3.2 3B, Llama 3.1 8B), ChatGPT, and Gemini.</li>
+            <li>We will investigate if higher model size and complexity correspond to improved accuracy at both coarse-grained and fine-grained levels.</li>
+        </ul>
+    </li>
+  
+    <li><strong>Handling between-level discrepancies:</strong>
+        <ul>
+            <li>For cases where classifications fall between levels (e.g., between A1 and A2), use an interpolated level system (e.g., A1.5).</li>
+            <li>This approach allows us to capture finer gradients in model responses and to compare performance across standard CEFR levels and interpolated, in-between levels.</li>
+        </ul>
+    </li>  
+
+    <li><strong>Exploring different prompting techniques:</strong>
+        <ul>
+            <li>Apply prompting strategies such as few-shot learning with retrieval-augmented generation (RAG) and chain-of-thought reasoning.</li>
+            <li>Assess how prompt design impacts model performance on fine-grained distinctions.</li>
+        </ul>
+    </li>
+
+    <li><strong>Fine-Tuning (Optional):</strong>
+        <ul>
+            <li>If time allows, experiment with fine-tuning select models on CEFR-labeled datasets to explore potential improvements in differentiating closely spaced levels.</li>
+            <li>Fine-tuning would not be a primary focus but could help assess the extent to which tailored training enhances proficiency classification.</li>
+        </ul>
+    </li>
+</ol>
+<!-- 
+<hr>    
+    
+<h2 id="problemform_ideas">Approach</h2>
 
 <p>
 <b>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</b>
@@ -180,7 +237,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 
 <p>
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-</p>
+</p> -->
 
 <hr>
     
