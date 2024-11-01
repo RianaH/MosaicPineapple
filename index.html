@@ -218,6 +218,7 @@ The primary challenge is to accurately assess language proficiency at a fine-gra
         </ul>
     </li>
 </ol>
+
 <!-- PLEASE UNCOMMENT THIS IF NEEDED [STARTING HERE]
 <hr>    
     
@@ -243,9 +244,145 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 
 <h2 id="approach">Preliminary result</h2>
 
-<p>ChatGPT sometimes estimated a question to be more difficult for C1-level learners (i.e., “Proficient”) than A1-level learners (i.e., “Basic”).</p>
-<p><a href="https://arxiv.org/pdf/2307.08393">[1]</a></p>
+<p>ChatGPT-3 exhibited wrong estimation, such as estimating a question to be more difficult for C1-level learners (i.e., “Proficient”) than A1-level learners (i.e., “Basic”) <a href="https://arxiv.org/pdf/2307.08393">[1]</a>.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Prompting Technique</strong></th>
+      <th style="text-align: center"><strong>True Level</strong></th>
+      <th style="text-align: center"><strong>Llama 3.2 1B</strong></th>
+      <th style="text-align: center"><strong>Llama 3.2 3B</strong></th>
+      <th style="text-align: center"><strong>Llama 3.1 8B</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>No-shot Prompting</strong></td>
+      <td style="text-align: center">A1</td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">A2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Few-shot Prompting</strong></td>
+      <td style="text-align: center">A1</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>System/Instructional Prompting</strong></td>
+      <td style="text-align: center">A1</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Chain-of-thought</strong></td>
+      <td style="text-align: center">A1</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">A2</td>
+    </tr>
+  </tbody>
+  <caption>Table 1. Comparison of A1-level classification across Llama models and prompting techniques.</caption>
+</table>
 
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Prompting Technique</strong></th>
+      <th style="text-align: center"><strong>True Level</strong></th>
+      <th style="text-align: center"><strong>Llama 3.2 1B</strong></th>
+      <th style="text-align: center"><strong>Llama 3.2 3B</strong></th>
+      <th style="text-align: center"><strong>Llama 3.1 8B</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>No-shot Prompting</strong></td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">B2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Few-shot Prompting</strong></td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">C1</td>
+      <td style="text-align: center">B2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>System/Instructional Prompting</strong></td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">A1</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Chain-of-thought</strong></td>
+      <td style="text-align: center">A2</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B1</td>
+    </tr>
+  </tbody>
+  <caption>Table 2. Comparison of A2-level classification across Llama models and prompting techniques.</caption>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Prompting Technique</strong></th>
+      <th style="text-align: center"><strong>True Level</strong></th>
+      <th style="text-align: center"><strong>Llama 3.2 1B</strong></th>
+      <th style="text-align: center"><strong>Llama 3.2 3B</strong></th>
+      <th style="text-align: center"><strong>Llama 3.1 8B</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>No-shot Prompting</strong></td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">A2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Few-shot Prompting</strong></td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">B2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>System/Instructional Prompting</strong></td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">A1</td>
+      <td style="text-align: center">C1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Chain-of-thought</strong></td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B1</td>
+      <td style="text-align: center">B2</td>
+      <td style="text-align: center">A1</td>
+    </tr>
+  </tbody>
+  <caption>Table 3. Comparison of B1-level classifications across Llama models and prompting techniques.</caption>
+</table>
+
+<h4>Error analysis of model performance in CEFR level classification</h4>
+
+<ul>
+    <li><strong>Llama 3.2 1B</strong> achieved an overall accuracy of <strong>75%</strong> for B1 sentence. This model frequently overrated A1-level sentences as A2 or B2. However, it correctly predicted B1-level sentence, despite the small size of the model.</li>
+
+    <li><strong>Llama 3.2 3B</strong> demonstrated some variability in its performance. This model often rated A1-level sentences as A2 or B1. Additionally, it frequently classified A2-level sentences as B1, B2, or even C1. There were instances where B1 sentences were underrated and classified as A1 when using system prompting. This model highlighted critical inconsistencies in its classifications.</li>
+
+    <li><strong>Llama 3.1 8B</strong> displayed the most diverse classification outcomes, which resulted in the greatest variability in performance. This model consistently rated A1-level sentences as A2 or B2 and often classified A2-level sentences as B1 or B2. Furthermore, it varied in its classification of B1 sentences, with some being downgraded to A1 or A2 while others were classified as C1 or B2. This model showcased a lack of stability in its predictions, even though it has the biggest size across 3 models.</li>
+</ul>
 <hr>
 
     
