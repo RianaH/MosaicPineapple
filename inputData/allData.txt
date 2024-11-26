@@ -9998,7 +9998,3 @@ Polydnaviruses are a unique group of insect viruses that have a mutualistic rela
 Polydnaviruses are a unique group of insect viruses that have a mutualistic relationship with parasitic wasps .	6	5
 The authors were able to experimentally determine a rate law at 261.2 K for the reaction of 1,2 - dimethylidenecyclohexane with sulfur dioxide to give the corresponding sulfolene .	6	6
 The authors were able to experimentally work out a rate law at 261.2 K for the reaction of 1,2 - dimethylidenecyclohexane with sulfur dioxide to give the corresponding sulfolene .	5	6
-The chemosynthetic bacteria grow into a thick mat which attracts other organisms , such as amphipods and copepods , which graze upon the bacteria directly .	6	5
-A proto-oncogene is a normal gene that could become an oncogene due to mutations or increased expression .	5	6
-The piezoelectric effect is generally stronger in materials that also show pyroelectricity , and all pyroelectric materials are also piezoelectric .	6	5
-The piezoelectric effect is generally stronger in materials that also exhibit pyroelectricity , and all pyroelectric materials are also piezoelectric .	6	6
