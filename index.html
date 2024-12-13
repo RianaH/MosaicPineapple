@@ -118,11 +118,9 @@
     
     <h2 id="abstract">Abstract</h2>
 
-<p>Assessing language proficiency based on the CEFR scale is crucial for educational and professional settings. While SOTA language models like ChatGPT can typically distinguish distant proficiency levels, 
-  they struggle with closer distinctions (e.g., A1 vs. A2). This project aims to analyze and compare the performance of multiple models, including ChatGPT, Gemini, and various Llama models (Llama 3.2 1B, Llama 3.2 3B, Llama 3.1 8B), 
-  in classifying both distant and adjacent CEFR levels. Our analysis evaluates classification through direct accuracy, ±1 level accuracy, and the best vs. worst accuracy gaps between levels, incorporating advanced prompting techniques, 
-  such as few-shot and chain-of-thought prompting. Optional steps include model fine-tuning and using intermediate “between levels” (e.g., A1.5) to refine results. 
-  We aim to analyze errors and model performance variations, especially for fine-grained and coarse-grained levels.</p>
+<p>Language proficiency assessment using the CEFR scale is traditionally accomplished by human language experts, but this task's subjective nature leads to inconsistencies in assessment results due to differing views of sentence complexity between experts. This has led to interest in research regarding the feasibility of using various machine learning methods and models for proficiency assessment. While other papers have focused on customized and/or fine-tuned methods for this task, and have found that certain algorithms and models can be optimized to be very accurate, we sought to find out how effective already existing open-source models like OpenAI's ChatGPT and Meta's Llama are at this task. We chose this approach because having commonly-available and consistent methods for automatic proficiency assessment could prove very useful in a number of fields including education, immigration, and work authorization. 
+
+To this end, we devised an experiment in which we used 3 set prompts in conjunction with 10,000 CEFR-labeled English sentences to test the effectiveness of ChatGPT, Llama1B, Llama3B, and Llama8B at the task of language proficiency. Our main findings are that both ChatGPT and Llama1B approach 90\% accuracy in classifying sentences within 1 CEFR level of their true level, while Llama3B and Llama8B tend to lag behind. Additionally, we found that the better a model is at classifying overall, the more consistent it is at classifying more "subjective" sentences according to experts. This means that both ChatGPT and Llama1B could be effectively used for automatic proficiency detection tasks, and that their results could be trusted to be both somewhat accurate, and more importantly, consistent.</p>
 
 <hr>
 
@@ -132,33 +130,21 @@
 
 <hr>
 
-<h2 id="introduction">Introduction / Background / Motivation</h2>
+<h2 id="introduction">Introduction </h2>
 
+<h3 id="problemoverview">Problem Overview </h3>    
 <p>
-<b>What did you try to do? What problem did you try to solve? Articulate your objectives using absolutely no jargon.</b>
-</p>
-<p>
-This study aims to advance language proficiency assessment by evaluating and comparing the performance of several language models—ChatGPT, Gemini, and various Llama models—on the fine-grained classification of CEFR proficiency levels. 
-We focus on models' direct accuracy in distinguishing specific levels, as well as their accuracy within one level and across best and worst accuracy gaps between adjacent levels. Additionally, we assess models' capabilities both between and within each proficiency level, 
-  contributing to the scalability of automated assessment across the proficiency continuum.
-</p>
-
-<p>
-<b>How is it done today, and what are the limits of current practice?</b>
-</p>
-<p>
-Current models often struggle to classify language proficiency at a granular level, typically focusing on broader level distinctions or general proficiency scoring. 
-  Fine-grained distinctions within and between levels are frequently overlooked, and most efforts depend on model size or basic prompting techniques. 
-  These limitations hinder the adaptability and scalability of such models for applications requiring nuanced assessment.
+Language proficiency assessment is a critical task with a wide range of uses in education, immigration, and work authorization. One of the most common methods for classifying a person's proficiency in a language is the Common European Framework of Reference for Languages (CEFR) scale, which assigns a person's proficiency in a given language to one of 6 levels (A1, A2, B1, B2, C1, and C2) in increasing order of proficiency. These levels are defined by a number of different aspects of the language to be classified, including vocabulary, sentence structure, and grammar. To some extent, this scale is inherently dependent on the interpretation of the person who classifies each sample, which often leads to situations in which two people may assign the same sample of a language to different levels on the CEFR scale. This has lead to a desire in recent years for an automatic language proficiency assessment, which would be unbiased and able to fully standardize the act of classifying a person's proficiency in a given language.</p>
 <p>
 
+<h3 id="background">Background </h3> 
 <p>
-<b>Who cares? If you are successful, what difference will it make?</b>
-</p>
+Significant research has already been done into the topic of using various machine learning techniques to classify text by proficiency level. The majority of this research, however, has focused on trying to find the most effective methods of proficiency detection among various machine learning algorithms or the most influential features of input text for classifying proficiency level. The experiments performed in these papers do not focus on the possible uses of existing language models, such as Google's Gemini or Meta's Llama for this task. Models such as Gemini are backed by massive amounts of training data and sources, which, when combined with their ease of access and ease of use, means that they could be very effective and convenient for the task at hand. Models like Llama also utilize large training datasets but are very lightweight and can even be downloaded and run locally, which means that if their performance is anywhere near as good as the likes of Gemini, they could prove incredibly useful for off-the-grid or security-focused use cases. Additionally, prior research has not looked into the association between sentences that cause human classification disagreements and those that are more difficult for language models. In our experiment, we prompted Gemini and multiple different versions of Llama to attempt to classify 10000 English input sentences by their CEFR level and used the pre-existing labels from 2 human annotators to derive a number of data points regarding accuracy, comparisons between LLM and human annotators, and both fine-grained and coarse-grained level discrimination accuracies. Conclusions were derived from these results pertaining to the efficacy of generalized language models for this task along with the drawbacks of such an approach.
 <p>
-This research adds to the scaling and continuum aspects of model assessment in language proficiency assessment tasks, enhancing the potential for accurate, automated, and scalable language proficiency classification across and within language levels. 
-  Success here would enable more precise proficiency evaluations and benefit NLP applications in language education, assessment, and personalized content generation.
 
+<h3 id="motivation">Motivation </h3> 
+<p>
+The primary impact of this experiment will be assessing the feasibility of using out-of-the-box language models for language proficiency assessment. If commonly available language models like ChatGPT and Llama1B are found to be effective, they could prove to be very useful for professionals in the fields mentioned above hoping to streamline their workflow. Even if the models are found to only be partially reliable, they could still be used to identify outlier sentences that the human annotators would then not need to spend time assessing. This could cause drastic increases in efficiency for the field of language proficiency detection. Additionally, if the models are found to be very effective, then they could theoretically be used as more consistent replacements for human annotators, since they would be more impartial and less susceptible to issues stemming from individual interpretation of the CEFR scale.
 </p>
 
 <hr>
@@ -170,9 +156,9 @@ This research adds to the scaling and continuum aspects of model assessment in l
 </p>
 
 <p>
-The primary challenge is to accurately assess language proficiency at a fine-grained level across the CEFR proficiency scale (A1–C2), which requires distinguishing both between and within levels. 
+The primary challenge is to accurately assess language proficiency across the CEFR proficiency scale (A1–C2), which requires distinguishing both between and within levels. 
   Existing models are effective at broader classification but lack the precision needed for adjacent level distinctions, and their performance is largely model-size dependent. 
-  This project investigates two main gaps: 1) models’ ability to classify closely spaced proficiency levels accurately, and 2) how various factors—model type, prompt design, and text features—affect performance on both a coarse-grained (e.g., A vs. B) and fine-grained (e.g., A1 vs. A1.5) scale.
+  This project investigates two main gaps: 1) Existing language models' abilities to classify proficiency levels accurately, and 2) How various factors—model type, prompt design, and text features—affect performance.
 </p>
 
 <p>
@@ -182,20 +168,13 @@ The primary challenge is to accurately assess language proficiency at a fine-gra
 <p>To address these challenges, we propose:</p>
 
 <ol>
-    <li><strong>Model comparisons (including fine-grained models with varying sizes)</strong>
+    <li><strong>Model comparisons</strong>
         <ul>
-            <li>Evaluate direct accuracy, ±1 level accuracy, and gaps in accuracy between best and worst adjacent-level distinctions.</li>
-            <li>This will include models of various sizes, specifically Llama models (Llama 3.2 1B, Llama 3.2 3B, Llama 3.1 8B), ChatGPT, and Gemini.</li>
+            <li>Evaluate direct accuracy, ±1 level accuracy, and above/below accuracy.</li>
+            <li>This will include models of various sizes, specifically Llama models (Llama 3.2 1B, Llama 3.2 3B, Llama 3.1 8B) and ChatGPT.</li>
             <li>We will investigate if higher model size and complexity correspond to improved accuracy at both coarse-grained and fine-grained levels.</li>
         </ul>
     </li>
-  
-    <li><strong>Handling between-level discrepancies:</strong>
-        <ul>
-            <li>For cases where classifications fall between levels (e.g., between A1 and A2), use an interpolated level system (e.g., A1.5).</li>
-            <li>This approach allows us to capture finer gradients in model responses and to compare performance across standard CEFR levels and interpolated, in-between levels.</li>
-        </ul>
-    </li>  
 
     <li><strong>Exploring different prompting techniques:</strong>
         <ul>
@@ -422,12 +401,24 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 
 
 <h2 id="conclusion">Conclustion and Future Work</h2>
-<p>
+    
+<h3 id="replicability">Replicability</h2>
+<p>Our results are extremely replicable. Any dataset of CEFR labeled English text combined with any prompt could be relatively easily run through ChatGPT and Llama models to get similarly formatted results to analyze. Of course the results would likely be different for different datasets, models, and prompts, but that would likely be due more to the annotators used for the dataset and the prompts used, and less to the models themselves. This is once again because the CEFR scale is open to human interpretation.</p>
 
-  How easily are your results able to be reproduced by others?
-  Did your dataset or annotation affect other people's choice of research or development projects to undertake?
-  Does your work have potential harm or risk to our society? What kinds? If so, how can you address them?
-  What limitations does your model have? How can you extend your work for future research?</p>
+<h3 id="dataset">Dataset</h2>
+<p>Our dataset was large enough to be significant, having about 10000 labeled sentences. The main drawback of our dataset was the use of only two human annotators, who often disagreed. A more fair dataset would have more annotators so a more definitive score could be determined for each sentence. This could have led to many different results, since often the models agreed with the annotator who labeled a sentence at a lower CEFR level, and perhaps with more annotators the true label would have trended down towards that lower level, in which case the model would have had a higher accuracy. Another possible drawback of our dataset is a bias towards higher level labels for longer sentences, which could be a cause for our result that the smaller Llama1B model was the most effective classifier. Our dataset choice did not seem to have an affect on any other people's choice in project to undertake, as our project was quite unique in its goal of testing already-existing language models for this task.</p>
+
+<h3 id="ethics">Ethics</h2>
+<p>The only possible risk this work could pose to society is based on the perceived morality of using machine learning for a task as "human" and language proficiency assessment. While we have mentioned that human annotators can be inconsistent at classifying text on the CEFR scale, and that language models could potentially solve this inconsistency problem, there is an argument to be made that only a human should be classifying human-written text. This mainly stems from the fact that most applications of this task are used in very high-importance fields like education, immigration, and work authorizations, all of which can fundamentally change a person's life. For this reason, it is understandable to argue that even a "mostly accurate" model should never be used for this task, since the highest possible accuracy is needed to ensure people's futures are not put at stake due to a false classification. The only real ways to combat this issue are to either develop models that exceedingly accurate in its assessments, or to have a human annotator evaluate the predictions of the model, which defeats the main purpose of using language models for this task in the first place.</p>
+
+<h3 id="futurework">Future Work</h2>
+<p>As the results show (\ref{fig:1}), our smallest model, Llama1B, was most effective at both correctly classifying and being within 1 CEFR level of the true label of the sentences, while ChatGPT was the second most effective, and Llama3B and Llama8B were both very ineffective. Additionally, ChatGPT and Llama1B were found to both retain accuracy when focusing on the more subjective sentences for which the human annotators of our disagreed, while Llama3B and Llama8B's accuracies went down significantly in this case. This is quite surprising, and more research could be done into the reasons for this behavior if this behavior continues for other models with differing sizes.</p>
+
+<p>Overall, our best exact accuracy was found to be about 45\%, and our best within-1-level accuracy was about 90\%. These values are lower than previous research into specialized models and methods for language proficiency assessment, which achieved exact accuracies as high as 82\% on the CEFR scale. This is to be expected, since the models were not fine-tuned or trained, and instead were used as-is. In the future, more research could be done on the effectiveness of fine-tuned or pre-trained open-source models for this task, to see if they can surpass custom models made for this task.</p>
+
+<p>Another key result is that the models with lower accuracies, specifically Llama3B and Llama8B, were consistently classifying sentences lower than they actually were on the CEFR scale, whereas higher performing models were more evenly split between high and low classifications. A better version of this experiment could have attempted to correct for this by shifting the predicted scores from Llama3B and Llama8B up by a set amount to account for this bias towards lower CEFR scores.</p>
+
+<p>Other ideas for future research include assessing the models' abilities in discriminating between closer and further apart CEFR level sentences, testing the models' efficacy for discriminating between broader and more specific scales (i.e. CEFR with just A, B, and C vs CEFR with A1, A1.5, A2, ...), and more research into which prompting techniques are most effective for this task, since the differing prompting techniques used in our experiment had no clear effects, with each of them being better in some cases and worse in others.</p>
 
 
 <hr>
