@@ -364,6 +364,11 @@ ChatGPT also overperforms Llama 3.2-1B in correctly predicting C1 sentences, whi
 <p>
 Overall, we were able to successfully show that the size of the model does matter in sentence classification accuracy and that the prompting technique does not appear to predict accuracy across models. 
 </p>
+
+<div class="image-container">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Fig2Average Difference to Ground Truth label.png" alt="On average, how far off each model was in its guessing from the true label.">
+  <p class="image-name">On average, how far off each model was in its guessing from the true label.</p>
+</div>
 <p>
 Figure 2 shows how far off each model was on average and provides another way, in addition to Figure 1 to analyze the best and worst performing models. Again, ChatGPT and the Llama 1B 0-shot and 1-shot perform the best. However, this graph allows us to see that Llama 8B 0-shot performs the fourth best by this metric, instead of the Llama 1B 1-shot. This graph also suggests that the LLama 8Bs performed better than the Llama 3Bs on average. This suggests that it is not a general trend that smaller models perform better but is instead that LLama 1B performs better than larger models. The fact that Llama 3B performs the worst warrants more research into why this is the case. It would be interesting to expand the test to other sizes of models to see what pattern emerges.
 </p>
