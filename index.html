@@ -91,7 +91,7 @@ To this end, we devised an experiment in which we used 3 set prompts in conjunct
 
 <h2 id="teaser">Overview </h2>
 
-<img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/one.jpg" alt="Process Overview" width="600" height="400">
+<img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/one.jpg" alt="Process Overview" width="800" height="600">
 
 <hr>
 
@@ -349,7 +349,7 @@ with different annotation and that of same annotation, the calibration for the c
 We tested the performance of 9 Llama models and the free version of ChatGPT. The Llama models tested were the ones of size 1 billion to 8 billion variables. For all of them, we measured accuracy in sentence classification ability across three different prompting techniques (0-shot, 1-shot, chain-of-thought). A correct classification was defined as when the model predicted the true database label. For incorrect guesses, we measured many factors such as how many levels off the guess was, whether the guess was too high or too low and whether there was a correlation between the probability of incorrect guessing and annotator disagreement (sentence "subjectivity"). The research of our analysis is presented below.Note that 1-shot and few-shot are used interchangeably throughout this report.
 </p>
 <div class="image-container">
-  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Correct vs off.png" alt="Figure 1: Prediction accuracy of the different models tested.">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Correct vs off.png" alt="Figure 1: Prediction accuracy of the different models tested."  width="600" height="400">
   <p class="image-name">Figure 1: Prediction accuracy of the different models tested.</p>
 </div>
 <p>
@@ -370,7 +370,7 @@ Overall, we were able to successfully show that the size of the model does matte
 </p>
 
 <div class="image-container">
-  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Fig2Average Difference to Ground Truth label.png" alt=" Figure 2: On average, how far off each model was in its guessing from the true label.">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Fig2Average Difference to Ground Truth label.png" alt=" Figure 2: On average, how far off each model was in its guessing from the true label."  width="600" height="400">
   <p class="image-name">Figure 2: On average, how far off each model was in its guessing from the true label.</p>
 </div>
 <p>
@@ -386,7 +386,7 @@ Reconciling the results of the first and second graphs, depends on what one care
 This figure, similar to the first figure, was a success in showing that models perform differently on language-level classification tasks and that the size of the model does matter in classification accuracy. This figure also shows us that it turns out the prompting technique does matter as well, which we were not able to glean from the first figure.
 </p>
 <div class="image-container">
-  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Too low vs too high.png" alt="Figure 3: Some models displayed a bias towards guessing too low.">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Too low vs too high.png" alt="Figure 3: Some models displayed a bias towards guessing too low."  width="600" height="400">
   <p class="image-name">Figure 3: Some models displayed a bias towards guessing too low.</p>
 </div>
 <p>
@@ -399,21 +399,21 @@ Overall, we successfully showed that there is a bias for models to under-predict
 Some failure cases of guessing too low or too high include classifying C1-C2 sentences as B1-B2 (for example, "Modern didgeridoo designs are distinct from the traditional Australian Aboriginal didgeridoo, and are innovations recognized by musicologists.", or vice-versa (for example, "Whitbourne has many of the facilities of a small town that has traditionally been a regional service center.").
 </p>
 <div class="image-container">
-  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Does within letter matter_.png" alt="Figure 4: There is not a strong bias for models to guess one off within vs between letters.">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Does within letter matter_.png" alt="Figure 4: There is not a strong bias for models to guess one off within vs between letters."  width="600" height="400">
   <p class="image-name">Figure 4: There is not a strong bias for models to guess one off within vs between letters.</p>
 </div>
 <p>
-Figure 4 addresses the research question of whether there is a within-letter bias in model prediction when an incorrect guess is one-off. Three within-level incorrect choices can be made when a guess is one-off (A1 vs A2, B1 vs B2, and C1 vs C2). Two between-level choices can be made when a guess is one-off (A2 vs B1, B2 vs C1). We normalized the results to account for the fact that within-level is inherently more likely due to this fact. After normalization, our result shows that there is not a strong bias towards either within or between letter guessing (all fo the results are around chance - 50\%). Nor is there a strong differentiation in bias between model sizes or from different prompting techniques. While there is no general strong bias, there is a slight bias towards guessing between letters for most models, with several of the bars being around 40\%. 
+Figure 4 addresses the research question of whether there is a within-letter bias in model prediction when an incorrect guess is one-off. Three within-level incorrect choices can be made when a guess is one-off (A1 vs A2, B1 vs B2, and C1 vs C2). Two between-level choices can be made when a guess is one-off (A2 vs B1, B2 vs C1). We normalized the results to account for the fact that within-level is inherently more likely due to this fact. After normalization, our result shows that there is not a strong bias towards either within or between letter guessing (all fo the results are around chance - 50%). Nor is there a strong differentiation in bias between model sizes or from different prompting techniques. While there is no general strong bias, there is a slight bias towards guessing between letters for most models, with several of the bars being around 40%. 
 </p>
 <p>
 This means that many of the models were slightly more likely to bridge a letter than guess within that letter. This was counter to our initial prediction. We thought that there was probably a reason why some levels were classified under the same letter (i.e. A1 and A2 - and why the classification levels weren't just A, B, C, D, E, F instead of A1, A2, B1, B2, C1, C2); The CEFR website states that the levels are grouped as such: A1-A2 (Basic User), B1-B2 (Independent User), and C1-C2 (Proficient User). Hence, we thought that this reason / this grouping may influence the models to be more likely to make mistakes within letter levels than between letter levels. However, this hypothesis was disproved by our results. Despite this, we did successfully test the hypothesis.
 </p>
 <div class="image-container">
-  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Model guesses across categories.png" alt="Figure 5: Model guesses as a whole follow the data’s underlying level spread, but some individual models do not.">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Model guesses across categories.png" alt="Figure 5: Model guesses as a whole follow the data’s underlying level spread, but some individual models do not."  width="600" height="400">
   <p class="image-name">Figure 5: Model guesses as a whole follow the data’s underlying level spread, but some individual models do not.</p>
 </div>
 <div class="image-container">
-  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Model correct guesses across categories.png" alt="Figure 6: The spread of correct guesses as compared to the underlying data.">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Model correct guesses across categories.png" alt="Figure 6: The spread of correct guesses as compared to the underlying data." width="600" height="400">
   <p class="image-name">Figure 6: The spread of correct guesses as compared to the underlying data.</p>
 </div>
 <p>
@@ -428,7 +428,7 @@ While we didn't get to investigate it in this project, it would be interesting t
 Overall, these figures are a useful tool to investigate 1) how the models guess compared to the underlying distribution, 2) how much over and under-guessing patterns are hindering model correctness, and 3) which models have biases towards certain sentence levels. They also shed insight into why some models perform better than others and why incorrect guesses occur. We successfully show that while on a whole, the models roughly guess along the underlying data trend, some individual models have strong biases favoring or de-favoring certain classifications, which impacts the overall performance of the models.
 </p>
 <p>
-In the cases that Llama 3.2-1B using CoT prompting guesses B1 wrongly, the correct labels are at most 2 levels off, with only less than $0.05\%$ 2 levels off out of the total predictions. Some example of one-level off include misevaluating B1 as B2 (for example, "It currently has articles, making it the 18th largest Wikipedia by article count.) or vice-versa (for example, "The series also featured at least one significant cameo role per episode.")
+In the cases that Llama 3.2-1B using CoT prompting guesses B1 wrongly, the correct labels are at most 2 levels off, with only less than 0.05% 2 levels off out of the total predictions. Some example of one-level off include misevaluating B1 as B2 (for example, "It currently has articles, making it the 18th largest Wikipedia by article count.) or vice-versa (for example, "The series also featured at least one significant cameo role per episode.")
 </p>
     
 <div class="image-container">
