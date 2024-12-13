@@ -430,40 +430,15 @@ Overall, these figures are a useful tool to investigate 1) how the models guess 
 <p>
 In the cases that Llama 3.2-1B using CoT prompting guesses B1 wrongly, the correct labels are at most 2 levels off, with only less than $0.05\%$ 2 levels off out of the total predictions. Some example of one-level off include misevaluating B1 as B2 (for example, "It currently has articles, making it the 18th largest Wikipedia by article count.) or vice-versa (for example, "The series also featured at least one significant cameo role per episode.")
 </p>
+    
+<div class="image-container">
+  <img src="https://raw.githubusercontent.com/RianaH/MosaicPineapple/main/figures/Fig7Accuracy of Model for Conflicting Annotation.png" alt="Process Overview" width="600" height="400">
+  <p class="image-name">Figure 7: Most models don’t perform differently on more subjective sentences.</p>
+</div>
 <p>
 Figure 7 was meant to address the research question of whether more subjective sentences (i.e. those where the two CEFR annotators disagreed on the sentence level) were harder for the model to classify. Overall, the difference between the red and blue bars are very minimal, showing that the models performance is not predicted by annotator disagreement / sentence subjectivity. Some of the worse performing models (Llama 1B COT, Llama 3Bs and Llama 8B 1-shot and COT) do seem to perform slightly worse on sentences where the annotator disagreed, which means they might be struggling a bit with the subjectivity, but not to a degree that it's a major point to note or worth trying to optimize on in order to increase model performance. Our figure successfully answer our question as to whether sentence subjectivity matters with a "no", especially for the better performing models.
 </p>
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center"><strong>Experiment</strong></th>
-      <th style="text-align: center">1</th>
-      <th style="text-align: center">2</th>
-      <th style="text-align: center">3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center"><strong>Sentence</strong></td>
-      <td style="text-align: center">Example 1</td>
-      <td style="text-align: center">Example 2</td>
-      <td style="text-align: center">Example 3</td>
-    </tr>
-    <tr>
-      <td style="text-align: center"><strong>Errors</strong></td>
-      <td style="text-align: center">error A, error B, error C</td>
-      <td style="text-align: center">error C</td>
-      <td style="text-align: center">error B</td>
-    </tr>
-  </tbody>
-  <caption>Table 1. This is Table 1's caption</caption>
-</table>
-<br>
-<div style="text-align: center;">
-<img style="height: 300px;" alt="" src="./files/results.png">
-</div>
-<br><br>
-
+    
 <hr>
 
 
@@ -479,7 +454,7 @@ Figure 7 was meant to address the research question of whether more subjective s
 <h3 id="ethics">Ethics</h2>
 <p>The only possible risk this work could pose to society is based on the perceived morality of using machine learning for a task as "human" and language proficiency assessment. While we have mentioned that human annotators can be inconsistent at classifying text on the CEFR scale, and that language models could potentially solve this inconsistency problem, there is an argument to be made that only a human should be classifying human-written text. This mainly stems from the fact that most applications of this task are used in very high-importance fields like education, immigration, and work authorizations, all of which can fundamentally change a person's life. For this reason, it is understandable to argue that even a "mostly accurate" model should never be used for this task, since the highest possible accuracy is needed to ensure people's futures are not put at stake due to a false classification. The only real ways to combat this issue are to either develop models that exceedingly accurate in its assessments, or to have a human annotator evaluate the predictions of the model, which defeats the main purpose of using language models for this task in the first place.</p>
 
-<h3 id="futurework">Future Work</h2>
+<h3 id="futurework">Conclusion and Future Work</h2>
 <p>As the results show, our smallest model, Llama1B, was most effective at both correctly classifying and being within 1 CEFR level of the true label of the sentences, while ChatGPT was the second most effective, and Llama3B and Llama8B were both very ineffective. Additionally, ChatGPT and Llama1B were found to both retain accuracy when focusing on the more subjective sentences for which the human annotators of our disagreed, while Llama3B and Llama8B's accuracies went down significantly in this case. This is quite surprising, and more research could be done into the reasons for this behavior if this behavior continues for other models with differing sizes.</p>
 
 <p>Overall, our best exact accuracy was found to be about 45%, and our best within-1-level accuracy was about 90%. These values are lower than previous research into specialized models and methods for language proficiency assessment, which achieved exact accuracies as high as 82% on the CEFR scale. This is to be expected, since the models were not fine-tuned or trained, and instead were used as-is. In the future, more research could be done on the effectiveness of fine-tuned or pre-trained open-source models for this task, to see if they can surpass custom models made for this task.</p>
