@@ -360,72 +360,67 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
     
 <h2 id="results">Results</h2>
 <p>
-<p>
-
 We tested the performance of 9 Llama models and the free version of ChatGPT. The Llama models tested were the ones of size 1 billion to 8 billion variables. For all of them, we measured accuracy in sentence classification ability across three different prompting techniques (0-shot, 1-shot, chain-of-thought). A correct classification was defined as when the model predicted the true database label. For incorrect guesses, we measured many factors such as how many levels off the guess was, whether the guess was too high or too low and whether there was a correlation between the probability of incorrect guessing and annotator disagreement (sentence "subjectivity"). The research of our analysis is presented below.Note that 1-shot and few-shot are used interchangeably throughout this report.
-<p>
 </p>
+<p>
 Figure 1 addresses the research question of how different sizes models fair on sentence classification. The percentage of correct answers is graphed in blue, where correct was defined as a label that matched the true label in the CEFR database for each sentence. Surprisingly, smaller-sized models outperformed larger-sized models in correctness. Three of the four best-performing models for correctness were the three Llama 1 billion models. The other one was ChatGPT, meaning our results also show that ChatGPT performed quite well on sentence classification, compared to the other models tested. 
 We additionally investigated how different prompting techniques performed. The different prompting techniques produced different results across the different models. For example, for Llama 1B, few-shot performed the best, then 0-shot, then COT. However, for the Llama 3B, 0-shot was the best, then COT, then few-shot. Finally, for the Llama 8B, 0-shot was the best, and few-shot and COT were nearly tied. Overall, we observe that a single prompting technique does not outperform the others reliably. 
-<p>
 </p>
+<p>
 We also plotted the answers that were one-off - either one too high or one too low - which are graphed in orange. Two-off, three-off, and four-off classifications are graphed as well. The fact that the orange bars are above the blue bars for all but one model (Llama 1B 1-shot) shows that the classification accuracy of the models is generally not the best. However, the orange and blue bars are much higher than the other bars for the smaller models, showing that the models are at least close in their classifications of sentence levels. For the larger models, this isn't necessarily the case. For Llama 8, the percentage of two-off guesses was almost as high as the percentage of correct guesses, especially on 1-shot and COT. This is true for Llama 3 COT as well, and for Llama 3 1-shot the green bar is higher than the blue bar. The red and purple bars are generally low, with the highest being the Llama 3B 1-shot, which is the worst-performing model and prompt combination with a low blue bar, and high green and red bars compared to the other models. 
-<p>
 </p>
+<p>
 One prominent failure case for one level off is the misclassification of a C1 sentence as B2, for example, "The standard shape for pyrohy is oblong with tapering ends, but rectangular or circular pyrohy are also common." This is due to the misclassification of the vocabulary "pyrohy" as a B2 rather than a C1 word. We also observe failure cases for two level off as all models misclassify a B1 sentence as A1 "My brother is my favorite sibling." Three-off failure examples include misclassifying a C2 sentence as B1 "With approximately 25 phonemes, the German consonant system has an average number of consonants in comparison with other languages." These failure cases might stem from the nuance nature of CEFR language in terms of coherence, fluency and context. This may be resolved by adding more instructions to our prompts to focus more on these topics. We also observe some hallucination by rating an A2 sentence as C2 by Llama 3.2-1B. 
-<p>
 </p>
+<p>
 ChatGPT also overperforms Llama 3.2-1B in correctly predicting C1 sentences, which are underrated by Llama as B1-B2, for example, "Despite their failure to score any hits, the American torpedo attacks achieved three important results." The main difference in reasoning between these two models is that ChatGPT could capture the complex sentence structure ("despite") and abstract vocabulary ("failure, achieved") that Llama3.2-1B fails to mention. There were also failure cases of Llama 3.2-3B and Llama 3.1-8B underrating sentences while Llama 3.2-1B correctly classifies it; for example, "Like most rattlesnakes, they live on land, and are not good climbers ." is B2 but rated as A2-B1. Surprisingly, the reasoning for these models are very similar to each other.
-<p>
 </p>
+<p>
 Overall, we were able to successfully show that the size of the model does matter in sentence classification accuracy and that the prompting technique does not appear to predict accuracy across models. 
-<p>
 </p>
+<p>
 Figure 2 shows how far off each model was on average and provides another way, in addition to Figure 1 to analyze the best and worst performing models. Again, ChatGPT and the Llama 1B 0-shot and 1-shot perform the best. However, this graph allows us to see that Llama 8B 0-shot performs the fourth best by this metric, instead of the Llama 1B 1-shot. This graph also suggests that the LLama 8Bs performed better than the Llama 3Bs on average. This suggests that it is not a general trend that smaller models perform better but is instead that LLama 1B performs better than larger models. The fact that Llama 3B performs the worst warrants more research into why this is the case. It would be interesting to expand the test to other sizes of models to see what pattern emerges.
-<p>
 </p>
+<p>
 While there was not a strong prompting-based pattern in the first graph, this graph suggests that 0-shot performs the best, as it is the smallest bar for each of the Llama models. This is surprising, as one might guess that the more you guide a model, the better it performs. However, this suggests that the models perform best without guidance/examples. 
-<p>
 </p>
+<p>
 Reconciling the results of the first and second graphs, depends on what one cares about most. The first graph is more helpful if you care primarily about the number of true correct guesses and want to base performance on that. Or if you want to avoid the worst performance - e.g. maybe you can avoid any model with a high bar for 4 off. The second graph is more helpful if you care about overall performance and want a measure of which models tend to be more or less off on across all answers. Taking both graphs into consideration together is probably the best approach to identifying the best-performing models.
-<p>
 </p>
+<p>
 This figure, similar to the first figure, was a success in showing that models perform differently on language-level classification tasks and that the size of the model does matter in classification accuracy. This figure also shows us that it turns out the prompting technique does matter as well, which we were not able to glean from the first figure.
-<p>
 </p>
+<p>
 Figure 3 explores the research question of whether there is a bias towards predicting too high or too low when incorrect classifications are made. This question gets at whether models have a propensity to think sentences are overly proficient or under-performing. We graph the percent of correct answers alongside the perfect of times each model classified sentences too high in level versus too low in level. Overall, there was a tendency for models to guess too low, meaning they unclassified the proficiency of sentences; every green bar is above its corresponding orange bar. This bias was less present in the better performing models - with it being a near tie for ChatGPT and Llama 1B 0-shot - and most pronounced in the worst performing models (namely Llama 3B 1-shot). The higher the relative size of the green bar to the orange bar, the higher the model's bias towards guessing low. 
-<p>
 </p>
+<p>
 Overall, we successfully showed that there is a bias for models to under-predict sentence level and that this bias is strongest in the worst-performing models. This suggests that much of the issue of model performance overall is being driven by an under-performance bias. Hence, one way to improve LLM's ability to correctly assess language level may be to introduce methods to promote higher classification. This could involve things like training on a higher subset of more sophisticated sentences or introducing a small-weight term penalizing under-classification. It's possible prompting techniques could also help address this - perhaps including in the prompt a suggested check such as "Please double check that you did not classify the sentence too low". As we learned in class, simply asking models to think step by step or check their answers often results in more accurate answers, so prompting the model to make sure it's not under-guessing could be a useful strategy to test. 
-<p>
 </p>
+<p>
 Some failure cases of guessing too low or too high include classifying C1-C2 sentences as B1-B2 (for example, "Modern didgeridoo designs are distinct from the traditional Australian Aboriginal didgeridoo, and are innovations recognized by musicologists.", or vice-versa (for example, "Whitbourne has many of the facilities of a small town that has traditionally been a regional service center.").
-<p>
 </p>
+<p>
 Figure 4 addresses the research question of whether there is a within-letter bias in model prediction when an incorrect guess is one-off. Three within-level incorrect choices can be made when a guess is one-off (A1 vs A2, B1 vs B2, and C1 vs C2). Two between-level choices can be made when a guess is one-off (A2 vs B1, B2 vs C1). We normalized the results to account for the fact that within-level is inherently more likely due to this fact. After normalization, our result shows that there is not a strong bias towards either within or between letter guessing (all fo the results are around chance - 50\%). Nor is there a strong differentiation in bias between model sizes or from different prompting techniques. While there is no general strong bias, there is a slight bias towards guessing between letters for most models, with several of the bars being around 40\%. 
-<p>
 </p>
+<p>
 This means that many of the models were slightly more likely to bridge a letter than guess within that letter. This was counter to our initial prediction. We thought that there was probably a reason why some levels were classified under the same letter (i.e. A1 and A2 - and why the classification levels weren't just A, B, C, D, E, F instead of A1, A2, B1, B2, C1, C2); The CEFR website states that the levels are grouped as such: A1-A2 (Basic User), B1-B2 (Independent User), and C1-C2 (Proficient User). Hence, we thought that this reason / this grouping may influence the models to be more likely to make mistakes within letter levels than between letter levels. However, this hypothesis was disproved by our results. Despite this, we did successfully test the hypothesis.
-<p>
 </p>
+<p>
 Figure 5 and Figure 6 explore guessing patterns of the models across the levels A1-C2 compared to the true distribution of the sentence levels. \textbf{Figure 5} looks at the distribution across total guesses (correct and incorrect) while \textbf{Figure 6} looks at the distribution across correct guesses only. In both graphs, the true distribution is graphed as a dotted black line. As can be seen from the dotted line, the distribution of sentence levels is not uniform - there is a higher prevalence of intermediate-level sentences (ie B1, B2) than extreme-level sentences (ie A1, C2). This likely is because a majority of regular language is at the intermediate level and it is harder to find or generate super complex or super incoherent sentences. A couple of things are of note from looking at \textbf{Figures 5 and 6}: 1) generally, the model guessing follows the trend of the true distribution. However, there is apparent bias in some models - for example, the red bar (model Llama 1B COT) has a much stronger preference for guessing B1 than is validated by the data's underlying distribution. It also has a stronger preference for A1 than is valid. And a huge bias against A2 and B2. Other models - such as the brown Llama 3B 1-shot show a bias towards A1 and A2 guessing, with a deficit in the others. So, while there is not a general bias trend across all of the models, individual models display distribution biases. Some examples are:
 Llama 1B 0-shot (orange): decent bias against B1 and towards B2.
 Llama 1B COT (red): large bias for B1 and A1 and against B2 and A2.
 Llama 3B 1-shot (brown): large bias for A1 and A2. Deficient for B1, B2, and C1.
 Llama 8b COT (teal): bias for A1 and B1 bias against A2 and huge bias against B2. 
 While we didn't get to investigate it in this project, it would be interesting to test the models on a CEFR dataset that was equally distributed between levels to see if that affected model performance. 2) When comparing the figures, we can make interesting observations about the relation between total guesses and correct guesses given the underlying distribution. Notably, the correct guesses for A1 are very low and the total guesses for A1 are above the true distribution. This makes some sense, as since there are not very many true A1 sentences, there are not many to guess right / fewer chances to get a correct A1 than with many of the other levels. It also makes sense that if the models expect a more similar underlying distribution why they might be guessing A1 in higher quantities than it truly exists. However, the fact that the A1 correct guesses are far below the true distribution of A1s also suggests that even for the A1s present, the model struggles to get them right. It would be interesting to investigate if this problem was partially alleviated if the model had more A1 sentences to train on. We can also notice that some bars in the correct guessing graph mirror their respective bars in the overall guessing graph while some do not. An example of some bars that do are the red and blue B1 bars and the orange, green, and blue B2 bars. This means that while those models are over-guessing their categories, they are also guessing a large percentage of those guesses correctly. Other bars do not follow this pattern. For example, the brown A2 bar is high in the overall guessing graph and low in the correct guessing graph, meaning that the model is over-guessing A2 to its detriment as it is not often getting those guesses correct. Comparing the two graphs can help identify when an over-guessing strategy might be serving a model decently well vs when it is working highly to the model's detriment. 
-<p>
 </p>
+<p>
 Overall, these figures are a useful tool to investigate 1) how the models guess compared to the underlying distribution, 2) how much over and under-guessing patterns are hindering model correctness, and 3) which models have biases towards certain sentence levels. They also shed insight into why some models perform better than others and why incorrect guesses occur. We successfully show that while on a whole, the models roughly guess along the underlying data trend, some individual models have strong biases favoring or de-favoring certain classifications, which impacts the overall performance of the models.
-<p>
 </p>
+<p>
 In the cases that Llama 3.2-1B using CoT prompting guesses B1 wrongly, the correct labels are at most 2 levels off, with only less than $0.05\%$ 2 levels off out of the total predictions. Some example of one-level off include misevaluating B1 as B2 (for example, "It currently has articles, making it the 18th largest Wikipedia by article count.) or vice-versa (for example, "The series also featured at least one significant cameo role per episode.")
-<p>
 </p>
+<p>
 Figure 7 was meant to address the research question of whether more subjective sentences (i.e. those where the two CEFR annotators disagreed on the sentence level) were harder for the model to classify. Overall, the difference between the red and blue bars are very minimal, showing that the models performance is not predicted by annotator disagreement / sentence subjectivity. Some of the worse performing models (Llama 1B COT, Llama 3Bs and Llama 8B 1-shot and COT) do seem to perform slightly worse on sentences where the annotator disagreed, which means they might be struggling a bit with the subjectivity, but not to a degree that it's a major point to note or worth trying to optimize on in order to increase model performance. Our figure successfully answer our question as to whether sentence subjectivity matters with a "no", especially for the better performing models.
-</p>
-</p>
-<p>
 </p>
 <table>
   <thead>
