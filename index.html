@@ -191,27 +191,48 @@ The primary challenge is to accurately assess language proficiency across the CE
     </li>
 </ol>
 
-<!-- PLEASE UNCOMMENT THIS IF NEEDED [STARTING HERE]
-<hr>    
-    
 <h2 id="problemform_ideas">Approach</h2>
 
 <p>
-<b>What did you do exactly? How did you solve the problem? Why did you think it would be successful? Is anything new in your approach?</b>
+Dataset: We use CEFR-SP dataset, which provides 17000 English sentences annotated with
+Common European Framework of Reference (CEFR) scale (A1-C2) levels assigned by English-education professionals. These
+sentences serve as ground truth for evaluating model performance. Each sentence is annotated with CEFR proficiency
+levels (A1-C2) by 2 annotators.
 </p>
 
 <p>
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Models and Prompting techniques: We aim to compare fine-grained models with varying sizes of Llama 3 family: 
+Llama 3.2-1B, Llama 3.2-3B, Llama 3.1-8B. The models are available on Hugging Face's meta-llama. We also use ChatGPT-4o 
+as the baseline for our analysis. Due to the rate limit (restrictions that providers' API imposes on the number of times
+a user or client can access services within a specified period of time) from Llama3 and OpenAI, the language classification 
+tasks are run by batches of 100 sentences.
 </p>
 
 <p>
-<b>What problems did you anticipate? What problems did you encounter? Did the very first thing you tried work?</b>
+
+We also explore various prompting strategies to assess their impact on model performance. For zero-shot prompting,
+models are provided with the sentence and a brief explanation of CEFR level and no examples: "Classify each
+sentence based on linguistic complexity, vocabulary, grammar, coherence, context, and overall fluency, assign CEFR
+levels: A1, A2, B1, B2, C1, or C2".
 </p>
 
 <p>
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-</p> [ENDING HERE] -->
+For few-shot promptings, models are supplied with 6 labeled examples from A1 to C2 to guide classification.
+For Chain-of-thought (CoT) prompting, models are guided to reason through the classification process step-by-step:
+"Think step by step. Analyze the following sentences considering their vocabulary, grammar, coherence, context
+and overall fluency. Step 1: proceed to ask guiding questions about vocabulary ...". All prompts are invoked to
+models using Hugging Face and LangChain frameworks to standardize prompt formatting and ensure reproducibility.
+</p>
 
+<p>
+Classification and Analysis Pipeline: The classification pipeline consists of the following steps:
+Each sentence is classified by all selected models, using all three prompting techniques (zero-shot, few-shot, chain-of-thought). 
+Classification results are compared against the pre-labeled dataset. When the annotators' labels
+disagree, we use the higher label according to previous research. For each model and prompting technique, we
+calculate the proportion of correct classification, the proportion of classifications within one/two/three level(s) of
+the ground truth, the difference in accuracy across CEFR levels A1-C2, the difference in accuracy between sentences
+with different annotation and that of same annotation, the calibration for the classification for each model.
+</p>
 <hr>    
 
 <h2 id="approach">Preliminary result</h2>
